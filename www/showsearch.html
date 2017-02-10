@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Directorio MAN</title>
+  <!-- CSS  -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" >
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo"><img height="63 px;" src="img/manvector.png"/> </a>
+      <ul class="right hide-on-med-and-down">
+      </ul>
+    </div>
+  </nav>
+    <nav>
+        <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search" name="search" type="search" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
+    
+  <div id="index-banner" class="parallax-container">
+    
+        <div class="row">
+      <div class="col s12">
+          <h3 class="black-text , center-align">Bienvenido al directorio de MAN</h3>
+        <div class="#ffffff white">
+            
+            
+            <table class="grilla responsive-table bordered" id="tablajson">
+                    <thead class='black-text'>
+                        <th>Nombre</th>
+                        <th>Area</th>
+                        <th>Telefono</th>
+                        <th>Extencion</th>
+                        <th>Celular</th>			
+                        <th>Correo</th>			
+                    </thead>
+                <tbody class='black-text'></tbody>
+            </table>
+           
+            <script id="source" language="javascript" type="text/javascript">
+
+  $(document).ready(function(){
+        var url="consulta1.php";
+            $("#tablajson tbody").html("");
+            $.getJSON(url,function(to_encode){
+            $.each(to_encode, function(i,cliente){
+        var newRow =
+            "<tr >"
+            +"<td>"+cliente.nombre+"</td>"
+            +"<td>"+cliente.area+"</td>"
+            +"<td>"+cliente.telefono+"</td>"
+            +"<td>"+cliente.extencion+"</td>"
+            +"<td>"+cliente.celular+"</td>"
+            +"<td>"+cliente.correo+"</td>"
+            +"</tr>";
+            $(newRow).appendTo("#tablajson tbody");
+        });
+        });
+        });
+      
+                document.querySelector("#search").onkeyup = function(){
+        $TableFilter("#tablajson", this.value);
+    }
+    
+    $TableFilter = function(id, value){
+        var rows = document.querySelectorAll(id + ' tbody tr');
+        
+        for(var i = 0; i < rows.length; i++){
+            var showRow = false;
+            
+            var row = rows[i];
+            row.style.display = 'none';
+            
+            for(var x = 0; x < row.childElementCount; x++){
+                if(row.children[x].textContent.toLowerCase().indexOf(value.toLowerCase().trim()) > -1){
+                    showRow = true;
+                    break;
+                }
+            }
+            
+            if(showRow){
+                row.style.display = null;
+            }
+        }
+    }
+
+
+  </script>
+          
+      </div>
+    </div>
+    <div class="parallax"><img src="img/realback.jpg" alt="Unsplashed background img 1"></div>
+        </div>
+  </div>
+ </body>
+  <footer class="page-footer teal">
+    <div >
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">MAN Truck & Bus</h5>
+          <p class="grey-text text-lighten-4">Bienvenidos a el directorio de MAN que está diseñado para hacer más fácil e buscar gente y
+            por el cual estamos muy contentos esperamos que les agrade tanto como a nosotros
+            cualquier comentario referente a este hablar con el equipo de IT</p>
+            
+        </div>
+        <div class="col l6 s12">
+          <h5 class="white-text">Otros sitios</h5>
+          <ul>
+            <li><a class="white-text" href="http://192.168.2.90/tickets/" target="_blank">Sistema Tickets</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <div class="footer-copyright">
+            <div class="container">
+            Ver 0.7 beta
+            <a class="grey-text text-lighten-4 right" href="#!"></a>
+            </div>
+          </div>
+      </footer>
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script> 
+</html>
